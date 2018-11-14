@@ -36,8 +36,9 @@ export class TodoForm extends React.Component {
                     autoComplete="off"
                     value={this.state.todoName}
                     onChange={this.handleChange}
+                    placeholder="Add task"
                 />
-                <button type="submit">Add Todo</button>
+                <button type="submit">+</button>
             </form>
         )
     }

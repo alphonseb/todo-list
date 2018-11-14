@@ -87,8 +87,27 @@ export class Todolist extends React.Component {
 
     render() {
         return (
-            <div>
-                <h2>To Do List</h2>
+            <div className="todo-list">
+                <h2>To Do</h2>
+                <p>
+                    You have{' '}
+                    {this.state.todos.filter(todo => !todo.complete).length}{' '}
+                    uncomplete tasks left.
+                </p>
+                <div>
+                    <button onClick={() => this.updateFilter('uncomplete')}>
+                        Show Uncomplete (
+                        {this.state.todos.filter(todo => !todo.complete).length}
+                        )
+                    </button>
+                    <button onClick={() => this.updateFilter('complete')}>
+                        Show Complete (
+                        {this.state.todos.filter(todo => todo.complete).length})
+                    </button>
+                    <button onClick={() => this.updateFilter('all')}>
+                        Show all ({this.state.todos.length})
+                    </button>
+                </div>
                 <TodoForm addToDo={this.addToDo} />
                 {this.state.todos
                     .filter(todo => {
@@ -109,21 +128,6 @@ export class Todolist extends React.Component {
                             deleteToDo={this.deleteToDo}
                         />
                     ))}
-                <p>
-                    Left :{' '}
-                    {this.state.todos.filter(todo => !todo.complete).length}
-                </p>
-                <div>
-                    <button onClick={() => this.updateFilter('complete')}>
-                        Show Complete
-                    </button>
-                    <button onClick={() => this.updateFilter('uncomplete')}>
-                        Show Uncomplete
-                    </button>
-                    <button onClick={() => this.updateFilter('all')}>
-                        Show all
-                    </button>
-                </div>
                 <div>
                     <button onClick={this.deleteAll}>Delete all</button>
                 </div>
