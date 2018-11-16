@@ -6,7 +6,8 @@ import base from '../base'
 export class Todolist extends React.Component {
     state = {
         todos: [],
-        filter: 'uncomplete'
+        filter: 'uncomplete',
+        loaded: false
     }
 
     componentDidMount() {
@@ -15,6 +16,7 @@ export class Todolist extends React.Component {
 
     getData = async () => {
         const baseData = await base.fetch('todo1/todos', { context: this })
+        await this.setState({ loaded: true })
 
         if (baseData.length) {
             this.setState({ todos: Object.values(baseData) })
@@ -86,6 +88,16 @@ export class Todolist extends React.Component {
     }
 
     render() {
+        if (!this.state.loaded) {
+            return (
+                <div>
+                    <div className="todo-list">
+                        <h2>To Do</h2>
+                    </div>
+                    <p className="loader">Loading To Dos...</p>
+                </div>
+            )
+        }
         return (
             <div className="todo-list">
                 <h2>To Do</h2>
