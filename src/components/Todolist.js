@@ -25,7 +25,7 @@ export class Todolist extends React.Component {
                 data: 'fen'
             })
         }
-        this.href = base.syncState('todo1/todos', {
+        this.ref = base.syncState('todo1/todos', {
             context: this,
             state: 'todos',
             asArray: true

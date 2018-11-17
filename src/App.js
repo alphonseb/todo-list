@@ -5,21 +5,42 @@ import netlifyIdentity from 'netlify-identity-widget'
 
 class App extends Component {
     state = {
-        isAuthenticated: false
+        isAuthenticated: netlifyIdentity.currentUser() !== null
     }
 
     login = () => {
         netlifyIdentity.open()
         netlifyIdentity.on('login', () => {
-            console.log('logged in')
+            this.setState({
+                isAuthenticated: true
+            })
+            netlifyIdentity.close()
+        })
+    }
+
+    logout = () => {
+        netlifyIdentity.open()
+        netlifyIdentity.on('logout', () => {
+            this.setState({
+                isAuthenticated: false
+            })
+            netlifyIdentity.close()
         })
     }
 
     render() {
+        if (!this.state.isAuthenticated) {
+            return (
+                <div className="App">
+                    <button onClick={this.login}>Log in</button>
+                </div>
+            )
+        }
+
         return (
             <div className="App">
-                <button onClick={this.login}>Log in</button>
-                {/* <Todolist /> */}
+                <Todolist />
+                <button onClick={this.logout}>Log out</button>
             </div>
         )
     }
