@@ -1,1 +1,1 @@
-html{font-size:62.5%}body{font-family:'Montserrat',sans-serif;font-size:2rem;}body .App{display:flex;justify-content:center;align-items:center;margin-top:3rem}h1,h2,h3,h4{margin:0}
+html{font-size:62.5%}body{font-family:'Montserrat',sans-serif;font-size:2rem;}body .App{display:flex;flex-direction:column;justify-content:center;align-items:center;margin-top:3rem}h1,h2,h3,h4{margin:0}
