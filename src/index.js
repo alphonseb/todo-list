@@ -4,6 +4,7 @@ import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 import netlifyIdentity from 'netlify-identity-widget'
+require('dotenv').config()
 
 window.netlifyIdentity = netlifyIdentity
 // You must run this once before trying to interact with the widget
