@@ -4,16 +4,10 @@ import { Todolist } from './components/Todolist'
 import netlifyIdentity from 'netlify-identity-widget'
 
 class App extends Component {
-    state = {
-        isAuthenticated: netlifyIdentity.currentUser() !== null
-    }
-
     login = () => {
         netlifyIdentity.open()
         netlifyIdentity.on('login', () => {
-            this.setState({
-                isAuthenticated: true
-            })
+            this.forceUpdate()
             netlifyIdentity.close()
         })
     }
@@ -21,15 +15,13 @@ class App extends Component {
     logout = () => {
         netlifyIdentity.open()
         netlifyIdentity.on('logout', () => {
-            this.setState({
-                isAuthenticated: false
-            })
+            this.forceUpdate()
             netlifyIdentity.close()
         })
     }
 
     render() {
-        if (!this.state.isAuthenticated) {
+        if (netlifyIdentity.currentUser() === null) {
             return (
                 <div className="App">
                     <button onClick={this.login}>Log in</button>
